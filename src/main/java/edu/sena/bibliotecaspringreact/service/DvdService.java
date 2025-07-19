@@ -1,23 +1,27 @@
 package edu.sena.bibliotecaspringreact.service;
 
 import edu.sena.bibliotecaspringreact.model.Dvd;
+import edu.sena.bibliotecaspringreact.repository.DvdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AutorService {
+public class DvdService {
+
     @Autowired
-    private AutorRepository autorRepository;
+    private DvdRepository dvdRepository;
 
     public List<Dvd> findAll() {
-        return autorRepository.findAll();
+        return dvdRepository.findAll();
     }
 
-    public Dvd save(Dvd autor) {
-        return autorRepository.save(autor);
+    public Dvd save(Dvd dvd) {
+        return dvdRepository.save(dvd);
     }
 
-    // Otros métodos según necesites
+    public void deleteById(Long id) {
+        dvdRepository.deleteById(id);
+    }
 }

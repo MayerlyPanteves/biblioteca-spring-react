@@ -1,27 +1,34 @@
 package edu.sena.bibliotecaspringreact.controller;
 
-import edu.sena.bibliotecaspringreact.model.Autor;
-import edu.sena.bibliotecaspringreact.service.AutorService;
+import edu.sena.bibliotecaspringreact.model.Dvd;
+import edu.sena.bibliotecaspringreact.service.DvdService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/autores")
-public class AutorController {
+@RequestMapping("/api/dvds")
+@CrossOrigin(origins = "http://localhost:3000")
+public class DvdController {
+
     @Autowired
-    private AutorService autorService;
+    private DvdService dvdService;
 
     @GetMapping
-    public List<Autor> getAllAutores() {
-        return autorService.findAll();
+    public List<Dvd> getAllDvds() {
+        return dvdService.findAll();
     }
 
     @PostMapping
-    public Autor createAutor(@RequestBody Autor autor) {
-        return autorService.save(autor);
+    public Dvd createDvd(@RequestBody Dvd dvd) {
+        return dvdService.save(dvd);
     }
 
-    // Otros endpoints según necesites
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteDvd(@PathVariable Long id) {
+        dvdService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

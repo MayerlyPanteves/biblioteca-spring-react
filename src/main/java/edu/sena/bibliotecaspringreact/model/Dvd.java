@@ -5,12 +5,18 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "autores")
-public class Autor {
+@Table(name = "dvds")
+public class Dvd {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
-    private String nacionalidad;
+    @Column(nullable = false)
+    private String titulo;
+
+    @Column(nullable = false)
+    private String director;
+
+    private Integer duracion; // en minutos
+    private String genero;
 }

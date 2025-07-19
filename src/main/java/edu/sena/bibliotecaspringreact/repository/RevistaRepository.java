@@ -1,4 +1,7 @@
 package edu.sena.bibliotecaspringreact.repository;
 
-public class PrestamoRepository {
+import edu.sena.bibliotecaspringreact.model.Revista;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RevistaRepository extends JpaRepository<Revista, Long> {
 }
