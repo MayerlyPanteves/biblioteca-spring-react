@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Catalogos.css'; // Mismo archivo de estilos que Dvds
+import './Catalogos.css';
 
 function Revistas() {
     const [revistas, setRevistas] = useState([]);
@@ -11,12 +11,17 @@ function Revistas() {
     useEffect(() => {
         const fetchRevistas = async () => {
             try {
+                console.log("Iniciando carga de revistas...");
                 const response = await fetch('/api/revistas');
-                if (!response.ok) throw new Error('Error al obtener revistas');
+
+                console.log("Respuesta del servidor:", response);
+                if (!response.ok) throw new Error(`Error: ${response.status}`);
+
                 const data = await response.json();
-                setRevistas(Array.isArray(data) ? data : []);
+                console.log("Datos recibidos:", data);
+                setRevistas(data);
             } catch (err) {
-                console.error('Error fetching Revistas:', err);
+                console.error("Error al cargar revistas:", err);
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -33,8 +38,11 @@ function Revistas() {
         <div className="catalogo-container">
             <div className="header">
                 <h1>Catálogo de Revistas</h1>
-                <button onClick={() => navigate('/')} className="back-button">
-                    Volver al Inicio
+                <button
+                    onClick={() => navigate('/agregar-revista')}
+                    className="add-button"
+                >
+                    Agregar Nueva Revista
                 </button>
             </div>
 
@@ -51,7 +59,15 @@ function Revistas() {
                     ))}
                 </div>
             ) : (
-                <p className="no-items">No hay revistas disponibles</p>
+                <div className="no-items-container">
+                    <p>No hay revistas disponibles en la base de datos</p>
+                    <button
+                        onClick={() => navigate('/agregar-revista')}
+                        className="add-button"
+                    >
+                        Agregar la Primera Revista
+                    </button>
+                </div>
             )}
         </div>
     );

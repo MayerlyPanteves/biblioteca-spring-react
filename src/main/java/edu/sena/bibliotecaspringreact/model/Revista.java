@@ -17,7 +17,7 @@ public class Revista {
     @Column(nullable = false)
     private String editorial;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String issn;
 
     @Column(nullable = false)
