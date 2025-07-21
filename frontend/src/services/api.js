@@ -1,31 +1,81 @@
 const API_URL = 'http://localhost:8080/api';
 
-export const createItem = async (endpoint, data) => {
-    const response = await fetch(`${API_URL}/${endpoint}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    return await response.json();
+// Operaciones para Libros
+export const getLibros = async () => {
+    try {
+        const response = await fetch(`${API_URL}/libros`);
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching libros:', error);
+        throw error;
+    }
 };
 
-export const getItems = async (endpoint) => {
-    const response = await fetch(`${API_URL}/${endpoint}`);
-    return await response.json();
+export const createLibro = async (libroData) => {
+    try {
+        const response = await fetch(`${API_URL}/libros`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                titulo: libroData.titulo,
+                autor: libroData.autor,
+                isbn: libroData.isbn,
+                año: libroData.año,
+                numeroPaginas: libroData.numeroPaginas || 0
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Error al crear libro');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error creating libro:', error);
+        throw error;
+    }
 };
 
-export const updateItem = async (endpoint, id, data) => {
-    const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    return await response.json();
+export const updateLibro = async (id, libroData) => {
+    try {
+        const response = await fetch(`${API_URL}/libros/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(libroData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error updating libro:', error);
+        throw error;
+    }
 };
 
-export const deleteItem = async (endpoint, id) => {
-    const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
-        method: 'DELETE'
-    });
-    return await response.json();
+export const deleteLibro = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/libros/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error deleting libro:', error);
+        throw error;
+    }
 };
