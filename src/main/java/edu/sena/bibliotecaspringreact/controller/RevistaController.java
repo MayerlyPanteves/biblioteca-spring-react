@@ -17,18 +17,12 @@ public class RevistaController {
     private RevistaService revistaService;
 
     @GetMapping
-    public List<Revista> getAllRevistas() {
-        return revistaService.findAll();
+    public ResponseEntity<List<Revista>> getAllRevistas() {
+        return ResponseEntity.ok(revistaService.findAllRevistas());
     }
 
     @PostMapping
-    public Revista createRevista(@RequestBody Revista revista) {
-        return revistaService.save(revista);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRevista(@PathVariable Long id) {
-        revistaService.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Revista> createRevista(@RequestBody Revista revista) {
+        return ResponseEntity.ok(revistaService.saveRevista(revista));
     }
 }

@@ -1,12 +1,12 @@
-package edu.sena.bibliotecaspringreact.model;
+package edu.sena.bibliotecaspringreact.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "dvds")
-public class Dvd {
+@Data
+public class DVD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +17,15 @@ public class Dvd {
     @Column(nullable = false)
     private String director;
 
-    private Integer duracion; // en minutos
+    @Column(nullable = false)
     private String genero;
+
+    @Column(nullable = false)
+    private Integer duracion; // en minutos
+
+    @Column(nullable = false)
+    private Integer anio;
+
+    @Column(unique = true)
+    private String codigoBarras;
 }

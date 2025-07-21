@@ -1,0 +1,47 @@
+.home-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.home-page h1 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+}
+
+.menu-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.option-card {
+    padding: 2rem;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-card:nth-child(1) {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.option-card:nth-child(2) {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.option-card:nth-child(3) {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}

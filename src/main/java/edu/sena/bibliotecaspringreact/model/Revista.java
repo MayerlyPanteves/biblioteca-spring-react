@@ -1,11 +1,11 @@
-package edu.sena.bibliotecaspringreact.model;
+package edu.sena.bibliotecaspringreact.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "revistas")
+@Data
 public class Revista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,15 @@ public class Revista {
     @Column(nullable = false)
     private String titulo;
 
+    @Column(nullable = false)
     private String editorial;
-    private String numero;
-    private String fecha;
+
+    @Column(nullable = false)
+    private String issn;
+
+    @Column(nullable = false)
+    private String periodicidad;
+
+    @Column(nullable = false)
+    private String tematica;
 }
